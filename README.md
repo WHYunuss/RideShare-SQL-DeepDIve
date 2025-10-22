@@ -1,117 +1,145 @@
-# 🚕 Uber & Lyft SQL Data Analysis Project
+# Uber & Lyft SQL Data Analysis Project
 
-## 📊 Project Overview
+## Project Overview
 
-This project presents a complete end-to-end SQL analysis of a large rideshare dataset containing thousands of Uber and Lyft ride records. Each ride includes attributes like cab type, price, distance, surge multiplier, and timestamps.
+This project is a complete end-to-end SQL analysis of a large rideshare dataset containing thousands of Uber and Lyft ride records. Each ride includes details like cab type, price, distance, surge multiplier, and timestamps.
 
-The goal was to simulate a real-world data analyst workflow — from raw data ingestion and cleaning to advanced querying and insight generation. Rather than executing isolated queries, the project was structured to reflect a mid-level SQL portfolio piece with practical, business-relevant skills.
+The goal was to simulate a real-world data analyst workflow — from ingesting and cleaning raw data to writing exploratory and business-driven SQL queries. Instead of running disconnected queries, the project follows a logical structure that reflects the kind of work you'd do in a mid-level analytics role.
 
 ---
 
-## 📁 Dataset
+## Dataset
 
 **Source**: Uber & Lyft Rides Dataset  
 
 - **Full Dataset**: `data/rides.csv` (too large to preview on GitHub)  
-- **Sample Dataset**: `data/rides_sample.csv` (~1–2k rows, previewable)
+- **Sample Dataset**: `data/rides_sample.csv` (smaller, previewable version with ~1–2k rows)
 
-### 🔑 Key Fields
+### Key Fields
 
-| Field            | Description                                               |
-|------------------|-----------------------------------------------------------|
-| `distance`       | Distance of the ride in miles                             |
-| `cab_type`       | Uber or Lyft                                              |
-| `time_stamp`     | Epoch time when ride data was captured                    |
-| `destination`    | Destination location                                      |
-| `source`         | Starting location                                         |
-| `price`          | Estimated ride cost (USD)                                 |
-| `surge_multiplier` | Surge pricing factor (default = 1)                      |
-| `id`             | Unique ride identifier                                    |
-| `product_id`     | Internal product type                                     |
-| `name`           | Ride type (e.g., UberPool, UberXL, Lyft Lux)             |
+| Field               | Description                                               |
+|---------------------|-----------------------------------------------------------|
+| `distance`          | Distance of the ride in miles                             |
+| `cab_type`          | Uber or Lyft                                              |
+| `time_stamp`        | Epoch time when ride data was captured                    |
+| `destination`       | Destination location                                      |
+| `source`            | Starting location                                         |
+| `price`             | Estimated ride cost (USD)                                 |
+| `surge_multiplier`  | Surge pricing factor (default = 1)                        |
+| `id`                | Unique ride identifier                                    |
+| `product_id`        | Internal product type                                     |
+| `name`              | Ride type (e.g., UberPool, UberXL, Lyft Lux)             |
 
 ---
 
-## 🛠️ Project Steps
+## Project Steps
 
 ### 1. Data Setup
+
 - Created schema: `rides`
-- Built raw staging table (all fields as `TEXT`)
-- Loaded CSV data into staging
-- Created cleaned table with appropriate data types (`NUMERIC`, `TIMESTAMP`, etc.)
+- Built a raw staging table (all fields as `TEXT` to avoid parsing errors)
+- Loaded the CSV data into staging
+- Created a cleaned table with proper data types (`NUMERIC`, `TIMESTAMP`, etc.)
 
 ### 2. Data Cleaning & Parsing
+
 - Converted `time_stamp` from epoch to PostgreSQL `TIMESTAMP`
-- Removed rows with missing/NULL values in `price` or `distance`
-- Deduplicated data using `id`
-- Replaced missing `surge_multiplier` with default value `1`
+- Removed rows with missing or null values in critical fields (`price`, `distance`)
+- Deduplicated rides using `id`
+- Replaced missing surge multipliers with the default value of 1
 
 ### 3. Exploratory Analysis
-- Counted total rides per `cab_type`
-- Listed all unique `ride types`
-- Analyzed price distribution per ride type
-- Measured frequency of surge multipliers > 1
+
+- Counted total rides per cab type
+- Listed all unique ride types
+- Analyzed price distributions per ride type
+- Checked how often surge multipliers were above 1
 
 ### 4. Business-Oriented Insights
-- Compared ride volumes between **Uber** and **Lyft**
+
+- Compared ride volumes between Uber and Lyft
 - Calculated average price per ride type
-- Analyzed surge pricing effect on total price
-- Identified top 5 most expensive ride types
-- Compared average ride distances between cab types
-- Studied hourly and day-of-week ride patterns
-- Measured correlation between price and distance
+- Analyzed the effect of surge pricing on total ride cost
+- Found the top 5 most expensive ride types
+- Compared average ride distances across cab types
+- Explored hourly and day-of-week ride trends
+- Measured correlation between ride distance and price
 
 ### 5. Advanced Metrics & Segmentation
-- Created `price_per_mile = price / distance`
-- Categorized rides into **Low / Medium / High** price tiers using `CASE`
-- Estimated ride type **market share** per platform
-- Analyzed surge behavior across different times of day
+
+- Created a new column: `price_per_mile = price / distance`
+- Segmented rides into low, medium, and high price tiers using `CASE`
+- Estimated market share of each ride type within Uber and Lyft
+- Analyzed surge trends by time of day
 
 ---
 
-## 🔍 Key Findings
+## Key Findings
 
-- **Uber vs Lyft**: One platform consistently dominated in ride volume
-- **Premium Pricing**: Luxury options (UberBlack, Lyft Lux) cost 4–6x more than base rides
-- **Surge Pricing**: Prices spiked significantly at night and on weekends
-- **Distance vs Price**: Positive correlation, but not linear — short rides often had high base costs
-- **Market Concentration**: A few ride types accounted for the majority of rides
+- **Uber vs Lyft**: One platform consistently had more rides than the other
+- **Premium Pricing**: Luxury rides like UberBlack and Lyft Lux were 4–6x more expensive than base options
+- **Surge Impact**: Surge pricing caused major price spikes, especially on weekends and late nights
+- **Distance vs Price**: There's a positive correlation, but it's not linear — short rides often have higher base costs
+- **Market Share**: A few popular ride types made up the majority of bookings
 
 ---
 
-## 🧠 SQL Skills Demonstrated
+## SQL Skills Demonstrated
 
-This project showcases intermediate to advanced SQL techniques:
+This project includes a wide range of intermediate-to-advanced SQL techniques:
 
-### ✅ Aggregations
+### Aggregations
 - `COUNT()`, `AVG()`, `SUM()`, `ROUND()`
 
-### ✅ Conditional Logic
-- `CASE WHEN` for ride tier segmentation
+### Conditional Logic
+- `CASE WHEN` for creating price tiers
 
-### ✅ Data Cleaning
-- Handling `NULL`s
-- Parsing epoch to timestamp
-- Deduplication using `ROW_NUMBER()`
+### Data Cleaning
+- Handling nulls and missing values
+- Parsing timestamps
+- Deduplicating with `ROW_NUMBER()`
 
-### ✅ Grouping & Filtering
+### Grouping & Filtering
 - `GROUP BY`, `HAVING`
 
-### ✅ Sorting & Limiting
+### Sorting & Limiting
 - `ORDER BY`, `LIMIT`
 
-### ✅ Window Functions
-- `ROW_NUMBER() OVER()` for deduplication & top-N analysis
-- `SUM() OVER()` for ride type market share
+### Window Functions
+- `ROW_NUMBER()` for deduplication and top-N analysis
+- `SUM() OVER()` to calculate market share
 
-### ✅ Date & Time Functions
-- `EXTRACT(HOUR FROM timestamp)`
-- `EXTRACT(DOW FROM timestamp)`
+### Date & Time Functions
+- `EXTRACT(HOUR)` and `EXTRACT(DOW)` for time-based trends
 
-### ✅ Statistical Analysis
-- `CORR(distance, price)` to measure pricing correlation
+### Statistical Functions
+- `CORR(distance, price)` to check price-distance relationship
 
 ---
+
+## Business Case (Optional Narrative)
+
+Imagine Uber's pricing team brings you on board to help them understand ride patterns, surge pricing behavior, and how Lyft is competing in shared markets. Your SQL analysis helps them decide when to promote certain ride types, how to adjust surge pricing strategies, and where Uber might be losing ground to Lyft.
+
+---
+
+## 📂 Folder Structure
+Uber-Lyft-SQL-Analysis/
+
+├── data/
+
+│ ├── rides.csv
+
+│ └── rides_sample.csv
+
+├── scripts/
+
+│ └── analysis_queries.sql
+
+├── README.md
+
+---
+
 
 ## 📌 Next Steps (Optional)
 - Add **dashboards** or **visualizations** using Tableau, Power BI, or Python
@@ -119,16 +147,6 @@ This project showcases intermediate to advanced SQL techniques:
 - Expand analysis with **real-time** or **streaming data**
 ---
 
-## 📂 Folder Structure
-Uber-Lyft-SQL-Analysis/
-├── data/
-│ ├── rides.csv
-│ └── rides_sample.csv
-├── scripts/
-│ └── analysis_queries.sql
-├── README.md
-
----
 
 ## 🧑‍💻 Author
 **YY** - trying some of this & that
