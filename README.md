@@ -123,7 +123,7 @@ Imagine Uber's pricing team brings you on board to help them understand ride pat
 
 ---
 
-## 📂 Folder Structure
+##  Folder Structure
 Uber-Lyft-SQL-Analysis/
 
 ├── data/
@@ -141,12 +141,12 @@ Uber-Lyft-SQL-Analysis/
 ---
 
 
-## 📌 Next Steps (Optional)
+## Next Steps (Optional)
 - Add **dashboards** or **visualizations** using Tableau, Power BI, or Python
 - Include **SQL views** or **stored procedures**
 - Expand analysis with **real-time** or **streaming data**
 ---
 
 
-## 🧑‍💻 Author
+## Meeee 🥺👉👈
 **YY** - trying some of this & that
