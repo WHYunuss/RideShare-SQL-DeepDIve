@@ -149,4 +149,4 @@ Uber-Lyft-SQL-Analysis/
 
 
 ## Meeee 🥺👉👈
-**YY** - trying some of this & that
+**YY** - trying some of this & that.
